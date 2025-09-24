@@ -1,17 +1,10 @@
 const std = @import("std");
 const assert = std.debug.assert;
 
-pub const CliError = error{
-    InvalidArgument,
-    UnknownOption,
-    MissingValue,
-    InvalidShortArgument,
-} || std.fmt.ParseIntError;
-
 pub const help_message =
     \\Usage: serve [PATH] [OPTIONS]
     \\
-    \\Simple static HTTP server.
+    \\A Simple static HTTP server.
     \\
     \\Arguments:
     \\  PATH                Specify the server path (default: '.')
@@ -22,6 +15,13 @@ pub const help_message =
     \\  -t, --threads NUM   Set the number of threads (default: 2)
     \\  -w, --workers NUM   Set the number of workers (default: 1)
 ;
+
+pub const CliError = error{
+    InvalidArgument,
+    UnknownOption,
+    MissingValue,
+    InvalidShortArgument,
+} || std.fmt.ParseIntError;
 
 pub const Args = struct {
     path: []const u8 = ".",

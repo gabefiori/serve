@@ -1,14 +1,3 @@
-const std = @import("std");
-const serve = @import("serve");
-const zap = @import("zap");
-const Logging = zap.Logging;
-const cli = @import("cli.zig");
-
-fn on_request(r: zap.Request) !void {
-    r.setStatus(.not_found);
-    r.sendBody("<html><body><h1>404 - File not found</h1></body></html>") catch return;
-}
-
 pub fn main() !void {
     var args_iter: cli.ArgsIterator = .init(std.os.argv);
     var args: cli.Args = .init(&args_iter);
@@ -43,3 +32,14 @@ pub fn main() !void {
         .workers = args.workers,
     });
 }
+
+fn on_request(r: zap.Request) !void {
+    r.setStatus(.not_found);
+    r.sendBody("<html><body><h1>404 - File not found</h1></body></html>") catch return;
+}
+
+const std = @import("std");
+const serve = @import("serve");
+const zap = @import("zap");
+const Logging = zap.Logging;
+const cli = @import("cli.zig");
