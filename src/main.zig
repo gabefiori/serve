@@ -39,7 +39,5 @@ fn on_request(r: zap.Request) !void {
 }
 
 const std = @import("std");
-const serve = @import("serve");
 const zap = @import("zap");
-const Logging = zap.Logging;
 const cli = @import("cli.zig");
