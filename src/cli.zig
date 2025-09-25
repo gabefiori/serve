@@ -4,7 +4,7 @@ const assert = std.debug.assert;
 pub const help_message =
     \\Usage: serve [PATH] [OPTIONS]
     \\
-    \\A Simple static HTTP server.
+    \\A lightweight static HTTP server for serving files.
     \\
     \\Arguments:
     \\  PATH                Specify the server path (default: '.')
