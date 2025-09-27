@@ -1,3 +1,11 @@
+const std = @import("std");
+const builtin = @import("builtin");
+
+const zap = @import("zap");
+const Logging = zap.Logging;
+
+const cli = @import("cli.zig");
+
 pub fn main() !void {
     var args_iter: cli.ArgsIterator = .init(std.os.argv);
     var args: cli.Args = .init(&args_iter);
@@ -16,6 +24,12 @@ pub fn main() !void {
         try stdout.flush();
 
         return;
+    }
+
+    if (builtin.mode == .Debug) {
+        Logging.fio_set_log_level(Logging.fio_log_level_debug);
+    } else {
+        Logging.fio_set_log_level(Logging.fio_log_level_info);
     }
 
     var listener = zap.HttpListener.init(.{
@@ -37,7 +51,3 @@ fn on_request(r: zap.Request) !void {
     r.setStatus(.not_found);
     r.sendBody("<html><body><h1>404 - File not found</h1></body></html>") catch return;
 }
-
-const std = @import("std");
-const zap = @import("zap");
-const cli = @import("cli.zig");
