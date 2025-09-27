@@ -10,6 +10,8 @@ pub fn build(b: *std.Build) void {
         .openssl = false,
     });
 
+    zap.artifact("facil.io").linkage = .static;
+
     const exe = b.addExecutable(.{
         .name = "serve",
         .root_module = b.createModule(.{
